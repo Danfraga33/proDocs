@@ -1,3 +1,14 @@
+## MVP
+
+[] - Sign in
+[] - Create Project with text, and media.
+[] - Use OpenAI to write the text smarter.
+[] - Create a template.
+[] - Use template to create a webpage
+[] - Store and display dashboard
+[] - Create an email tempalte
+[] - Attach project
+
 ## ELEMENTS
 
 [x] - Auth
