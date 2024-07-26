@@ -9,6 +9,11 @@
 [] - Create an email tempalte
 [] - Attach project
 
+## Ideas for future Dev / Problems with future Dev
+
+- What if they dont have a database
+- Database media (NOSQL or SQL data visualizer)
+
 ## ELEMENTS
 
 [x] - Auth
