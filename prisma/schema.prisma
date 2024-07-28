@@ -19,7 +19,12 @@ model User {
 model Project {
   id        Int     @id @default(autoincrement())
   name String @default("Software Development Project")
-  description String
+  description String @default("A Software solution that uses cutting edge technology")
+  howItWorks String 
   features String?
-
+  techStack String?
+  libaries String?
+  routes String?
+  team String?
+  deployment String?
 }
