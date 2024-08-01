@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import { auth } from "@/utils/auth";
+import Sidebar from "@/components/sidebar";
+import Header from "@/lib/components/Header";
 
 export default async function DashboardLayout({
   children,
@@ -11,8 +13,9 @@ export default async function DashboardLayout({
   const session = await auth();
 
   return (
-    <section>
-      {session && <h1>Sidebar</h1>}
+    <section className="flex flex-col h-screen">
+      <Header />
+      {session && <Sidebar />}
       {children}
     </section>
   );
