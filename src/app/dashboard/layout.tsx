@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { auth } from "@/utils/auth";
 import Sidebar from "@/components/sidebar";
 import Header from "@/lib/components/Header";
+import { createClient } from "@/utils/supabase/client";
 
 export default async function DashboardLayout({
   children,
@@ -10,12 +10,13 @@ export default async function DashboardLayout({
   children: ReactNode;
   params: { portfolioId: string; stockId: string };
 }) {
-  const session = await auth();
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getSession();
 
   return (
     <section className="flex flex-col h-screen">
       <Header />
-      {session && <Sidebar />}
+      {data.session && <Sidebar />}
       {children}
     </section>
   );
