@@ -6,14 +6,19 @@ import { Button } from "@/components/ui/button";
 export default async function Home() {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
-  console.log(data.user);
   return (
     <div className="h-screen">
       <Header />
       <div className="flex-center h-full">
-        <Button asChild>
-          <Link href="/login">Login</Link>
-        </Button>
+        {!data.user ? (
+          <Button asChild>
+            <Link href="/login">Login</Link>
+          </Button>
+        ) : (
+          <Button asChild>
+            <Link href="/">Logout</Link>
+          </Button>
+        )}
       </div>
     </div>
   );

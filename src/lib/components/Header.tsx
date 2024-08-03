@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
@@ -8,10 +8,11 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { createClient } from "@/utils/supabase/server";
 
-const Header = () => {
-  const { data: session } = useSession();
+const Header = async () => {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
   return (
     <>
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -24,38 +25,38 @@ const Header = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
-              <Link href="#" prefetch={false}></Link>
+              <Link href="/" prefetch={false}></Link>
               <div className="grid gap-2 py-6">
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
                   Home
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
                   About
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
                   Services
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
                   Portfolio
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
@@ -65,7 +66,7 @@ const Header = () => {
             </SheetContent>
           </Sheet>
           <Link
-            href="#"
+            href="/"
             className="mr-6 hidden lg:flex"
             prefetch={false}
           ></Link>
@@ -73,7 +74,7 @@ const Header = () => {
             <NavigationMenuList>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/"
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
@@ -91,7 +92,7 @@ const Header = () => {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/"
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
@@ -100,7 +101,7 @@ const Header = () => {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/"
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
@@ -109,26 +110,27 @@ const Header = () => {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/"
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
                   Contact
                 </Link>
               </NavigationMenuLink>
+              <NavigationMenuLink asChild>
+                {!data.user ? (
+                  <Button asChild>
+                    <Link href="/login">Login</Link>
+                  </Button>
+                ) : (
+                  <Button asChild>
+                    <Link href="/">Logout</Link>
+                  </Button>
+                )}
+              </NavigationMenuLink>
             </NavigationMenuList>
           </NavigationMenu>
-          <div className="ml-auto flex gap-2">
-            {session ? (
-              <Button variant="default" onClick={() => signOut()}>
-                Sign Out
-              </Button>
-            ) : (
-              <Button variant="default" onClick={() => signIn()}>
-                Sign In
-              </Button>
-            )}
-          </div>
+          <div className="ml-auto flex gap-2"></div>
         </header>
       </div>
     </>
