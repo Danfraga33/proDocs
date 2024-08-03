@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function LayoutOnea(data: any) {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
