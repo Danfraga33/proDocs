@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "../lib/components/Header";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "@/utils/auth";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,22 +18,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
   return (
     <html lang="en" suppressHydrationWarning>
-      {" "}
-      <SessionProvider session={session}>
-        <body
-          className={cn(
-            "flex-center min-h-screen font-sans bg-gray-50 dark:bg-stone-800 antialised grainy",
-            fontSans.variable,
-          )}
-        >
-          <Header />
-          {children}
-        </body>
-      </SessionProvider>
+      <body
+        className={cn(
+          "flex-center min-h-screen font-sans bg-gray-50 dark:bg-stone-800 antialised grainy",
+          fontSans.variable,
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
