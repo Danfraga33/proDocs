@@ -22,7 +22,7 @@
 [] - Complete Database
 [] - Optimized Loading for Rendering w/websockets
 [] - Enable users to change color theme with conditional styling
-[] - Create multiple templates  
+[] - Create min of 2 templates  
 [] - Explore creating parrell routes for dashboard
 [] - Create profile - Add Elements later.
 [] - UI
@@ -34,3 +34,5 @@
 - Creates Projects
 - Stores in DB
 - Webpage is generated
+- After webpage is generated, has ability to copy and paste the code to their own portfolio
+- After website is generated, user is shown an email button - which links them to a emailto.
