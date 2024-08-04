@@ -1,4 +1,4 @@
-import Header from "@/lib/components/Header";
+import Header from "@/components/layouts/Header";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

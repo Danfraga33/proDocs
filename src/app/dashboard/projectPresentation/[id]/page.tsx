@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getSelectedProject } from "~/actions/project";
+import { getImages, getSelectedProject } from "@/app/actions/project";
+import Image from "next/image";
 
 export default async function LayoutOne({
   params,
@@ -8,11 +9,12 @@ export default async function LayoutOne({
   params: { id: string };
 }) {
   const project = await getSelectedProject(params);
-  console.log(project);
   if (!project) {
     console.error("No project selected");
     redirect("/dashboard");
   }
+  const images = await getImages();
+  console.log("Client:", images);
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
@@ -37,8 +39,8 @@ export default async function LayoutOne({
                   </Link>
                 </div>
               </div>
-              <img
-                src=""
+              <Image
+                src={images[0]}
                 width="550"
                 height="550"
                 alt="Hero"
@@ -61,9 +63,9 @@ export default async function LayoutOne({
                   Streamline Your Workflow
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Acme Project is designed to help you and your team work more
-                  efficiently, with powerful features that simplify your daily
-                  tasks.
+                  {project?.name} is designed to help you and your team work
+                  more efficiently, with powerful features that simplify your
+                  daily tasks.
                 </p>
               </div>
             </div>
@@ -117,7 +119,7 @@ export default async function LayoutOne({
                   Screenshots
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  See Acme Project in Action
+                  See {project?.name} in Action
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Explore the intuitive user interface and powerful features of
@@ -151,11 +153,11 @@ export default async function LayoutOne({
                   Our Team
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Meet the Acme Project Developers
+                  Meet the {project?.name} Project Developers
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Our talented team of developers is dedicated to continuously
-                  improving and enhancing Acme Project.
+                  improving and enhancing {project?.name} Project.
                 </p>
               </div>
             </div>
@@ -205,7 +207,7 @@ export default async function LayoutOne({
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-muted-foreground">
-          &copy; 2024 Acme Inc. All rights reserved.
+          &copy; 2024 {project?.name} Inc. All rights reserved.
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link

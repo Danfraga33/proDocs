@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
-import { getAllProjects } from "~/actions/project";
+import { getAllProjects } from "@/app/actions/project";
 
 type Project = {
   id: number;
@@ -20,6 +20,7 @@ const Dashboard = async () => {
       <Button asChild>
         <Link href="/dashboard/create/project">Create New Project</Link>
       </Button>
+      asd
       {projects.map((project) => (
         <div key={project.id}>
           <ul className="flex mt-2 justify-start">
@@ -33,6 +34,7 @@ const Dashboard = async () => {
           </ul>
         </div>
       ))}
+      asd
     </div>
   );
 };
