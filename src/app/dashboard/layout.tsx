@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Sidebar from "@/components/sidebar";
-import Header from "@/lib/components/Header";
+import Header from "@/components/layouts/Header";
 import { createClient } from "@/utils/supabase/client";
 
 export default async function DashboardLayout({
