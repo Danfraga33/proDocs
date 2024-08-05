@@ -1,14 +1,12 @@
 import { ReactNode } from "react";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/Sidebar";
 import Header from "@/components/layouts/Header";
 import { createClient } from "@/utils/supabase/client";
 
 export default async function DashboardLayout({
   children,
-  params,
 }: {
   children: ReactNode;
-  params: { portfolioId: string; stockId: string };
 }) {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getSession();
