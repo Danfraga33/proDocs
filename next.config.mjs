@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "hazpdcnwfauaoahrfvbf.supabase.co/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "assets.aceternity.com/**",
+        port: "",
+      },
     ],
   },
 };
