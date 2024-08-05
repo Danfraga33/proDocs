@@ -1,0 +1,34 @@
+[
+  {
+    "id": "description",
+    "text": "Description"
+  },
+  {
+    "id": "how-it-works",
+    "text": "How it works"
+  },
+  {
+    "id": "features",
+    "text": "Features"
+  },
+  {
+    "id": "tech-stack",
+    "text": "Tech Stack"
+  },
+  {
+    "id": "libraries",
+    "text": "Libaries"
+  },
+  {
+    "id": "routes",
+    "text": "Routes"
+  },
+  {
+    "id": "team",
+    "text": "Team"
+  },
+  {
+    "id": "deployment",
+    "text": "Deployment"
+  }
+]
